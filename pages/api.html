@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Dashboard</title>
+   <link rel="stylesheet" href="./style/api.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">API Hub</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#">API</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li><a href="#consumo">Consumo</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" id="navToggle">📋 Menu API</button>
+        </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="closeSidebar">&times;</button>
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">APIs Disponíveis</h2>
+        </div>
+
+        <!-- Download Category -->
+        <div class="api-category">
+            <div class="category-header" data-category="download">
+                <span class="category-title">📥 Download</span>
+                <span class="category-arrow">▼</span>
+            </div>
+            <div class="category-items">
+                <div class="api-item" data-api="youtube">🎥 YouTube</div>
+                <div class="api-item" data-api="instagram">📸 Instagram</div>
+                <div class="api-item" data-api="tiktok">🎵 TikTok</div>
+                <div class="api-item" data-api="twitter">🐦 Twitter</div>
+                <div class="api-item" data-api="facebook">📘 Facebook</div>
+            </div>
+        </div>
+
+        <!-- Search Category -->
+        <div class="api-category">
+            <div class="category-header" data-category="search">
+                <span class="category-title">🔍 Pesquisar</span>
+                <span class="category-arrow">▼</span>
+            </div>
+            <div class="category-items">
+                <div class="api-item" data-api="g1">📰 G1 Notícias</div>
+                <div class="api-item" data-api="terra">🌍 Terra</div>
+                <div class="api-item" data-api="perfil-insta">👤 Perfil Instagram</div>
+                <div class="api-item" data-api="google">🌐 Google Search</div>
+                <div class="api-item" data-api="youtube-search">🎬 YouTube Search</div>
+            </div>
+        </div>
+
+        <!-- Tools Category -->
+        <div class="api-category">
+            <div class="category-header" data-category="tools">
+                <span class="category-title">🛠️ Ferramentas</span>
+                <span class="category-arrow">▼</span>
+            </div>
+            <div class="category-items">
+                <div class="api-item" data-api="qr-code">📱 Gerador QR Code</div>
+                <div class="api-item" data-api="url-short">🔗 Encurtador URL</div>
+                <div class="api-item" data-api="image-convert">🖼️ Conversor Imagem</div>
+                <div class="api-item" data-api="pdf-tools">📄 Ferramentas PDF</div>
+            </div>
+        </div>
+
+        <!-- Info Category -->
+        <div class="api-category">
+            <div class="category-header" data-category="info">
+                <span class="category-title">📊 Informações</span>
+                <span class="category-arrow">▼</span>
+            </div>
+            <div class="category-items">
+                <div class="api-item" data-api="cep">📮 Consulta CEP</div>
+                <div class="api-item" data-api="clima">🌤️ Clima</div>
+                <div class="api-item" data-api="ip-info">🌐 Info IP</div>
+                <div class="api-item" data-api="crypto">💰 Criptomoedas</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="api-showcase">
+            <img src="https://i.pinimg.com/originals/7e/96/d9/7e96d994f29b388f63f7aa77ff2bea78.gif" class="api-image">
+            <h1 class="api-title" id="apiTitle">Selecione uma API</h1>
+            <p class="api-description" id="apiDescription">
+                Escolha uma API no menu lateral para ver as informações detalhadas, testar sua chave e verificar o número de requisições disponíveis.
+            </p>
+
+            <div class="key-checker">
+                <h3 class="checker-title">🔑 Verificar Chave API</h3>
+                <div class="input-group">
+                    <input type="text" class="key-input" id="apiKey" placeholder="Cole sua chave API aqui...">
+                    <button class="check-btn" id="checkBtn">Verificar</button>
+                </div>
+                <div class="key-status" id="keyStatus"></div>
+                <div class="requests-info" id="requestsInfo"></div>
+            </div>
+        </div>
+
+        <div class="warning-section">
+            <h3 class="warning-title">⚠️ Aviso Importante</h3>
+            <p class="warning-text">
+                Mantenha sua chave API em segurança! Nunca compartilhe suas credenciais com terceiros. 
+                As chaves são pessoais e intransferíveis. Use sempre HTTPS em suas requisições para garantir a segurança dos dados.
+            </p>
+        </div>
+    </main>
+
+    <script>
+        // API Data
+        const apiData = {
+            'youtube': {
+                title: '🎥 YouTube Downloader',
+                description: 'Faça download de vídeos e áudios do YouTube em diferentes qualidades. Suporte para playlists e vídeos individuais.',
+                emoji: '🎥'
+            },
+            'instagram': {
+                title: '📸 Instagram Downloader',
+                description: 'Baixe fotos, vídeos, stories e reels do Instagram de forma rápida e segura.',
+                emoji: '📸'
+            },
+            'tiktok': {
+                title: '🎵 TikTok Downloader',
+                description: 'Download de vídeos do TikTok sem marca d\'água em alta qualidade.',
+                emoji: '🎵'
+            },
+            'g1': {
+                title: '📰 G1 Notícias API',
+                description: 'Acesse as últimas notícias do G1, filtre por categoria e mantenha-se sempre atualizado.',
+                emoji: '📰'
+            },
+            'terra': {
+                title: '🌍 Terra Notícias',
+                description: 'API para buscar notícias do portal Terra, com filtros por categoria e data.',
+                emoji: '🌍'
+            },
+            'perfil-insta': {
+                title: '👤 Perfil Instagram',
+                description: 'Obtenha informações detalhadas de perfis do Instagram, incluindo seguidores, posts e bio.',
+                emoji: '👤'
+            },
+            'qr-code': {
+                title: '📱 Gerador QR Code',
+                description: 'Gere QR codes personalizados para textos, URLs, contatos e muito mais.',
+                emoji: '📱'
+            },
+            'cep': {
+                title: '📮 Consulta CEP',
+                description: 'Consulte informações detalhadas de endereços através do CEP brasileiro.',
+                emoji: '📮'
+            },
+            'clima': {
+                title: '🌤️ Previsão do Tempo',
+                description: 'Obtenha informações meteorológicas em tempo real de qualquer cidade do mundo.',
+                emoji: '🌤️'
+            }
+        };
+
+        // DOM Elements
+        const navToggle = document.getElementById('navToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const mainContent = document.getElementById('mainContent');
+        const categoryHeaders = document.querySelectorAll('.category-header');
+        const apiItems = document.querySelectorAll('.api-item');
+        const checkBtn = document.getElementById('checkBtn');
+        const apiKey = document.getElementById('apiKey');
+        const keyStatus = document.getElementById('keyStatus');
+        const requestsInfo = document.getElementById('requestsInfo');
+        const apiTitle = document.getElementById('apiTitle');
+        const apiDescription = document.getElementById('apiDescription');
+
+        // Toggle Sidebar
+        navToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            if (window.innerWidth > 768) {
+                mainContent.classList.add('sidebar-open');
+            }
+        });
+
+        // Close Sidebar
+        function closeSidebarFunc() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            mainContent.classList.remove('sidebar-open');
+        }
+
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
+
+        // Category Toggle
+        categoryHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const items = header.nextElementSibling;
+                const arrow = header.querySelector('.category-arrow');
+                
+                items.classList.toggle('active');
+                arrow.classList.toggle('active');
+            });
+        });
+
+        // API Item Selection
+        apiItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active from all items
+                apiItems.forEach(i => i.classList.remove('active'));
+                // Add active to clicked item
+                item.classList.add('active');
+                
+                const apiType = item.dataset.api;
+                const data = apiData[apiType];
+                
+                if (data) {
+                    document.querySelector('.api-image').textContent = data.emoji;
+                    apiTitle.textContent = data.title;
+                    apiDescription.textContent = data.description;
+                }
+                
+                // Close sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    closeSidebarFunc();
+                }
+            });
+        });
+
+        // Key Checker
+        checkBtn.addEventListener('click', () => {
+            const key = apiKey.value.trim();
+            
+            if (!key) {
+                showKeyStatus('Insira uma chave API válida', 'invalid');
+                return;
+            }
+            
+            // Simulate API key validation
+            checkBtn.textContent = 'Verificando...';
+            checkBtn.disabled = true;
+            
+            setTimeout(() => {
+                const isValid = key.length >= 20; // Simple validation
+                const requests = Math.floor(Math.random() * 1000) + 100;
+                
+                if (isValid) {
+                    showKeyStatus('✅ Chave API válida!', 'valid');
+                    requestsInfo.textContent = `Requisições disponíveis: ${requests}`;
+                } else {
+                    showKeyStatus('❌ Chave API inválida', 'invalid');
+                    requestsInfo.textContent = '';
+                }
+                
+                checkBtn.textContent = 'Verificar';
+                checkBtn.disabled = false;
+            }, 1500);
+        });
+
+        function showKeyStatus(message, type) {
+            keyStatus.textContent = message;
+            keyStatus.className = `key-status ${type}`;
+            keyStatus.style.display = 'block';
+        }
+
+        // Responsive sidebar behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                mainContent.classList.remove('sidebar-open');
+            } else if (sidebar.classList.contains('active')) {
+                mainContent.classList.add('sidebar-open');
+            }
+        });
+    </script>
+</body>
+</html>

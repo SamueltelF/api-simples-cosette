@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSETTE - Bot Platform</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body onload="carregarStats()">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">COSETTE</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="./pages/api.html">API</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li><a href="#consumo">Consumo</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul>
+                    <li><a href="./pages/api.html" onclick="closeMenu()">API</a></li>
+                    <li><a href="#login" onclick="closeMenu()">Login</a></li>
+                    <li><a href="#consumo" onclick="closeMenu()">Consumo</a></li>
+                    <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <div class="main-content">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img class="profile-image" src="./img/per.jpg" alt="perfil destiny">
+                </div>
+            </div>
+            <div class="description">
+                <h2>Plataforma Inteligente de Bots</h2>
+                <p>Conecte-se com o futuro da automação. Nossa plataforma oferece bots inteligentes para todas as suas necessidades, com integração simples e performance excepcional.</p>
+            </div>
+            <a href="#" class="add-bot-btn" onclick="addBot()">Add Bot</a>
+        </div>
+    </section>
+
+    <!-- Bot Section -->
+    <section class="bot-section">
+        <div class="container">
+            <h2 class="section-title">BOT</h2>
+            <p class="bot-description">
+                Nossos bots são projetados para oferecer a melhor experiência de automação, com inteligência artificial avançada e capacidade de aprendizado contínuo. Eles se adaptam às suas necessidades e evoluem com o tempo.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img class="feature-gif" src="./img/corta4.jpg">
+                    <h3>Velocidade</h3>
+                    <p>Respostas instantâneas com processamento otimizado</p>
+                </div>
+                <div class="feature-card">
+                    <img class="feature-gif" src="./img/perrt.jpg">
+                    <h3>Inteligência</h3>
+                    <p>IA avançada com capacidade de aprendizado</p>
+                </div>
+                <div class="feature-card">
+                    <img class="feature-gif" src="./img/corta.jpg">
+                    <h3>Integração</h3>
+                    <p>Conexão simples com suas plataformas existentes</p>
+                </div>
+            </div>
+
+            <!-- Warning Section -->
+            <div class="warning-section">
+                <h3 class="warning-title">⚠️ Aviso Importante</h3>
+                <p class="warning-text">
+                    Mantenha sempre sua API key segura e não compartilhe suas credenciais. Monitore regularmente o consumo de recursos para otimizar custos e performance.
+                </p>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+  <h3 class="stats-title">Visão Geral dos Usuários</h3>
+  <div class="total-users" id="totalUsers">Carregando...</div>
+  <p>Usuários Registrados</p>
+
+  <div class="os-stats">
+    <div class="os-card">
+      <div class="os-name">📱 Android</div>
+      <div class="os-count" id="androidCount">-</div>
+      <div class="os-percentage" id="androidPercent">-</div>
+    </div>
+    <div class="os-card">
+      <div class="os-name">🍎 iPhone</div>
+      <div class="os-count" id="iphoneCount">-</div>
+      <div class="os-percentage" id="iphonePercent">-</div>
+    </div>
+    <div class="os-card">
+      <div class="os-name">💻 Web</div>
+      <div class="os-count" id="webCount">-</div>
+      <div class="os-percentage" id="webPercent">-</div>
+    </div>
+    <div class="os-card">
+      <div class="os-name">❓ Sem sistema</div>
+      <div class="os-count" id="semSistemaCount">-</div>
+      <div class="os-percentage" id="semSistemaPercent">-</div>
+    </div>
+  </div>
+</div>
+        </div>
+    </section>
+
+   <script src="./js/usuarios.js"></script>
+</body>
+</html>
