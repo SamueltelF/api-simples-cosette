@@ -1,6 +1,6 @@
 async function carregarStats() {
   try {
-    const response = await fetch("https://cosette.uno//api/usuario/client/stats");
+    const response = await fetch("https://cosette.uno/api/usuario/client/stats");
     const data = await response.json();
 
     if (data.sucesso) {
